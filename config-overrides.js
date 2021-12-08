@@ -20,6 +20,13 @@ module.exports = function override(config, env) {
         use: [{loader: require.resolve('wasm-loader'), options: {}}]
     });
 
+    // add a dedicated loader for SVGs
+    config.module.rules.push({
+        test: /\.svg$/,
+        // include: path.resolve(__dirname, 'src'),
+        use: ['@svgr/webpack'],
+    });
+
     // config.module.rules.push({
     //     test: /\.wasm$/,
     //     loaders: ['base64-loader'],

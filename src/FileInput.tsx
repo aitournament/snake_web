@@ -1,4 +1,5 @@
-import {Button} from "@material-ui/core";
+
+import { Button } from "@mui/material";
 import React, {ReactChild, ReactChildren, ReactNode} from "react";
 
 interface FileInputProps {
@@ -10,6 +11,7 @@ export default function FileInput(props: FileInputProps) {
     return <Button
         variant="contained"
         component="label"
+        color="success"
     >
         {props.children}
         <input
