@@ -1,17 +1,20 @@
 
-import { Button } from "@mui/material";
+import { Button, SxProps, Theme } from "@mui/material";
 import React, {ReactChild, ReactChildren, ReactNode} from "react";
 
 interface FileInputProps {
     children?: ReactNode,
-    onChange?: (filename: string, bytes: ArrayBuffer) => void
+    onChange?: (filename: string, bytes: ArrayBuffer) => void,
+    sx?: SxProps<Theme>
+
 }
 
 export default function FileInput(props: FileInputProps) {
     return <Button
         variant="contained"
         component="label"
-        color="success"
+        color="secondary"
+        sx={props.sx}
     >
         {props.children}
         <input
