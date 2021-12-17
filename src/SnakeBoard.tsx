@@ -8,9 +8,24 @@ interface Pos {
   y: number,
 }
 
+interface Timestamp {
+  tick: number,
+  cycleInTick: number,
+}
+
+interface Food {
+  pos: Pos,
+  healthValue: number
+}
+
+type Winner = {type: "win", data: number} | {type: "pending"} | {type: "tie"};
+
+
 export interface BoardState {
-  food: Pos[],
+  food: Food[],
   snakes: Snake[],
+  winner: Winner,
+  timestamp: Timestamp
 }
 
 export interface Snake {
@@ -30,11 +45,11 @@ export default function SnakeBoard(props: SnakeBoardProps) {
       height={HEIGHT * TILE_SIZE}
       style={{border: '1px solid gray'}}
   >
-    {props.state.food.map((pos, i) => {
+    {props.state.food.map((food, i) => {
       return <circle
           key={i}
-          cx={pos.x * TILE_SIZE + TILE_SIZE / 2}
-          cy={pos.y * TILE_SIZE + TILE_SIZE / 2}
+          cx={food.pos.x * TILE_SIZE + TILE_SIZE / 2}
+          cy={food.pos.y * TILE_SIZE + TILE_SIZE / 2}
           r={(TILE_SIZE / 2) * 0.30}
           fill="green"/>;
     })}

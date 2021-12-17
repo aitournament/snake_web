@@ -14,6 +14,7 @@ export default function FileInput(props: FileInputProps) {
         variant="contained"
         component="label"
         color="secondary"
+        size="small"
         sx={props.sx}
     >
         {props.children}
