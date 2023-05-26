@@ -2,7 +2,7 @@ import { Box, ListItem, ListItemButton, ListItemText, Paper, Typography } from "
 import { useEffect, useState } from "react";
 // import { List } from "react-virtualized";
 import List from "@mui/material/List";
-import { EventEnvelope, Event } from "./event";
+import { EventEnvelope, Event, Pos } from "./event";
 import TimestampDisplay from "./Timestamp";
 // import { VirtualizedTable } from "./VirtualizedTable";
 import { FixedSizeList, ListChildComponentProps } from "react-window";
@@ -124,32 +124,119 @@ function EventRow(props: EventRowProps) {
     </Box>;
 }
 
-function getEventMessage(event: Event): string {
+function getEventMessage(event: Event): JSX.Element {
     switch (event.type) {
         case "SNAKE_ADDED": {
             let data = event.data;
-            let color = data.teamId == 0 ? "Red" : "Blue";
-            return `${color} snake (id=${data.snakeId}) added at (${data.head.x}, ${data.head.y})`;
+            // let color = data.teamId == 0 ? "Red" : "Blue";
+            return <p>{getColor(data.teamId)} snake {snakeId(data.snakeId)} added at {pos(data.head)}</p>;
         }
         case "FOOD_ADDED": {
             let data = event.data;
-            return `Food added at (${data.pos.x}, ${data.pos.y}) with a health value of ${data.healthValue}`;
+            return <p>Food added at {pos(data.pos)} with a health value of {data.healthValue}</p>;
         }
         case "SNAKE_SLEEP": {
             let data = event.data;
-            let color = data.teamId == 0 ? "Red" : "Blue";
-            return `${color} snake (id=${data.snakeId}) is sleeping for ${data.cycles} cycles`;
+            // let color = data.teamId == 0 ? <span style={{color: 'red'}}>Red</span> : <span style={{color: 'blue'}}>Blue</span>;
+            return <p>{getColor(data.teamId)} snake {snakeId(data.snakeId)} is sleeping for {data.cycles} cycles</p>;
         }
         case "SNAKE_MOVED": {
             let data = event.data;
-            let color = data.teamId == 0 ? "Red" : "Blue";
             let description = data.forced ? "was forced to move" : (data.leap ? "leaped" : "moved");
-            return `${color} snake (id=${data.snakeId}) ${description} from (${data.from.x}, ${data.from.y}) to (${data.to.x}, ${data.to.y})`;
+            return <p>{getColor(data.teamId)} snake {snakeId(data.snakeId)} {description} from {pos(data.from)} to {pos(data.to)}</p>;
+        }
+        case "SNAKE_DIED": {
+            let data = event.data;
+
+            let reason;
+            switch (data.reason.type) {
+                case "TOO_SMALL_TO_SPLIT": {
+                    reason = "too small to split";
+                    break;
+                }
+                case "COLLISION": {
+                    reason = "collision";
+                    break;
+                }
+                case "MOVE_OUT_OF_BOUNDS": {
+                    reason = "out of bounds move";
+                    break;
+                }
+                case "NOT_READY_TO_LEAP": {
+                    reason = "illegal leap";
+                    break;
+                }
+                case "NOT_READY_TO_MOVE": {
+                    reason = "illegal move";
+                    break;
+                }
+                case "ZERO_HEALTH": {
+                    reason = data.reason.data.type == "EAT" ? "zero health (ate poison)" : "zero health (hunger)";
+                    break;
+                }
+                case "EXECUTION_FAILURE": {
+                    switch (data.reason.data.type) {
+                        case "MAIN_EXITED": {
+                            reason = "code ended";
+                            break;
+                        }
+                        case "UNREACHABLE": {
+                            reason = "code panic";
+                            break;
+                        }
+                        case "STACK_OVERFLOW": {
+                            reason = "stack overflow";
+                            break;
+                        }
+                        case "MEMORY_SIZE_EXCEEDED": {
+                            reason = "out of memory";
+                            break;
+                        }
+                        case "OUT_OF_BOUNDS_MEMORY_ACCESS": {
+                            reason = "illegal memory access";
+                            break;
+                        }
+                        case "DIVIDE_BY_ZERO": {
+                            reason = "divide by zero";
+                            break;
+                        }
+                        case "OUT_OF_BOUNDS_TABLE_ACCESS": {
+                            reason = "illegal table access";
+                            break;
+                        }
+                        case "INVALID_INDIRECT_CALL_TARGET": {
+                            reason = "invalid indirect call target";
+                            break;
+                        }
+                        case "UNIMPLEMENTED": {
+                            reason = "Internal VM error. This is a bug, please report";
+                            break;
+                        }
+                        case "INVALID_FUNCTION_INPUT": {
+                            reason = "invalid function call";
+                            break;
+                        }
+                    }
+                }
+            }
+            return <p>{getColor(data.teamId)} snake {snakeId(data.snakeId)} died ({reason})</p>
         }
         default: {
             let event_any:any = event;
             console.log(`Type: ${event_any.type} with data: ${JSON.stringify(event_any.data)}`);
-            return `Unknown type: (${event_any.type})`;
+            return <p>Unknown type: ({event_any.type})</p>;
         }
     }
+}
+
+function getColor(teamId: number): JSX.Element {
+    return teamId == 0 ? <span style={{color: 'red'}}>Red</span> : <span style={{color: 'blue'}}>Blue</span>;
+}
+
+function snakeId(id: number): JSX.Element {
+    return <span style={{color: '#9e9e9e'}}>(id={id})</span>;
+}
+
+function pos(pos: Pos): JSX.Element {
+    return <span style={{color: '#9e9e9e'}}>({pos.x}, {pos.y})</span>;
 }
