@@ -30,7 +30,7 @@ export interface BoardState {
 
 export interface Snake {
   id: number,
-  owner_id: number,
+  team_id: number,
   body: Pos[]
 }
 
@@ -54,7 +54,7 @@ export default function SnakeBoard(props: SnakeBoardProps) {
           fill="green"/>;
     })}
     {props.state.snakes.map((snake, snake_i) => {
-      let color = snake.owner_id == 0 ? 'red': 'blue';
+      let color = snake.team_id == 0 ? 'red': 'blue';
       return snake.body.map(({x,y}, body_i) => {
         let size = body_i == 0? 0.7 : 0.5;
         return <circle

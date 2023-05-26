@@ -7,8 +7,11 @@ export interface EventEnvelope {
 
 // }
 
-export type Event = {type: "SNAKE_ADDED", data: SnakeAddedEvent}
-| {type: "FOOD_ADDED", data: FoodAddedEvent};
+export type Event = 
+{type: "SNAKE_ADDED", data: SnakeAddedEvent} |
+{type: "FOOD_ADDED", data: FoodAddedEvent} |
+{type: "SNAKE_SLEEP", data: SnakeSleepEvent}|
+{type: "SNAKE_MOVED", data: SnakeMoveEvent};
 
 export interface Timestamp {
     tick: number,
@@ -17,12 +20,28 @@ export interface Timestamp {
 
 export interface SnakeAddedEvent {
     snakeId: number,
-    ownerId: number,
+    teamId: number,
     head: Pos,
 }
 
+export interface SnakeSleepEvent {
+    snakeId: number,
+    teamId: number,
+    cycles: number,
+}
+
+export interface SnakeMoveEvent {
+    snakeId: number,
+    teamId: number,
+    from: Pos,
+    to: Pos,
+    leap: boolean,
+    forced: boolean,
+}
+
 export interface FoodAddedEvent {
-    pos: Pos
+    pos: Pos,
+    healthValue: number
 }
 
 export interface Pos {

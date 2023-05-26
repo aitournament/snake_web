@@ -6,7 +6,7 @@ import WasmInput from "./WasmInput";
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 import ReplayIcon from '@mui/icons-material/Replay';
-import ReactVirtualizedTable from "../../ReactVirutalizedTable";
+// import ReactVirtualizedTable from "../../ReactVirutalizedTable";
 import Timestamp from "../../Timestamp";
 import { EventEnvelope, Event } from "../../event";
 import EventsDisplay from "../../EventsDisplay";
@@ -87,7 +87,7 @@ export default function PlayPage() {
 
   (global as any).onEvent = (event: EventEnvelope) => {
     console.log("New event:", event);
-    setEvents((prevEvents => [...prevEvents, event]));
+    setEvents((prevEvents => [event, ...prevEvents]));
   }
 
 
@@ -250,7 +250,6 @@ export default function PlayPage() {
               m: 5
             }}>
             <EventsDisplay eventEnvelopes={events} />
-            {/* <ReactVirtualizedTable/> */}
           </Box>
 
 
