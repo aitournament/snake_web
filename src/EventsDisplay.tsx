@@ -22,48 +22,11 @@ interface RenderProps {
 
 
 export default function EventsDisplay(props: EventsDisplayProps) {
-
-
-    // let [list, setList] = useState<string[]>([]);
-
-    // let list:string[] = [];
-    // for(let i=0; i<10000000; i++) {
-    //     list.push(`Value ${i}`);
-    // }
-
-    // useEffect(() => {
-    //     let interval: any = null;
-    //     // if (running) {
-    //       interval = setInterval(() => {
-    //         setList((prevList) => 
-    //             [...prevList, `Value ${prevList.length}`]
-    //         )
-
-    //       }, 5000);
-
-    //     return () => {
-    //       if (interval) {
-    //         clearInterval(interval);
-    //       }
-    //     }
-    //   }, []);
-
-    // function renderRow(input: RenderProps): JSX.Element {
-    //     return (
-    //         // <Box>
-    //         <EventRow key={input.index} eventEnvelope={props.eventEnvelopes[input.index]} />
-    //     );
-    // }
     function renderRow(props: ListChildComponentProps) {
         const { data, index, style } = props;
-        // console.log("Props:", props);
-      
         return (
           <ListItem style={style} key={index} component="div" disablePadding>
             <EventRow key={index} eventEnvelope={data[index]} />
-            {/* <ListItemButton>
-              <ListItemText primary={`Item ${index + 1}`} />
-            </ListItemButton> */}
           </ListItem>
         );
       }
@@ -75,10 +38,6 @@ export default function EventsDisplay(props: EventsDisplayProps) {
     });
 
     return <Paper sx={{backgroundColor: 'grey.800'}}>
-        
-        {/* <List style = {{width: 800, height: 300}}>
-            {rows}
-        </List> */}
         <FixedSizeList
         height={300}
         width={800}
@@ -89,15 +48,6 @@ export default function EventsDisplay(props: EventsDisplayProps) {
       >
         {renderRow}
       </FixedSizeList>
-        
-        {/* <List
-            width={800}
-            height={300}
-            rowCount={props.eventEnvelopes.length}
-            rowHeight={16}
-            rowRenderer={rowRenderer}
-        // scrollToIndex={props.events.length-1}
-        /> */}
     </Paper>;
 
 }
