@@ -1,7 +1,7 @@
 # Game Rules
 
 Each player controls a team of snakes, controlled by a WASM file. Two teams compete at a time.
-The first team to lose all snakes loses. If both teams lose their last snake on the same CPU cycle, the game is a tie.
+The last player remaining in the game wins. If both teams lose their last snake on the same CPU cycle, the game is a tie.
 
 The game rules are designed to ensure games will end in a finite amount of time.
 
@@ -36,17 +36,18 @@ Each snake starts with 100 health. One health is lost at the end of each tick. I
 
 ## Food
 
-Food has a health value, which is the amount that a snake's health with increase/decrease by eating it.
+Food has a health value, which is the amount that a snake's health with increase/decrease by eating it. Snakes will always grow when eating food, regardless of the health value.
+
 
 Freshly spanwed food will start with a health value of 1, and increase by 1 every tick up to a maximum of 50.
 
 When part (or all) of a snake dies, it drops to the ground as (poisonous) food. These start with a health value of -50, and increase by 1 every tick up to a maximum of 0.
 
-When (non-poisonous) food is consumed, new food will be randomly spawned at the end of the tick to replace it.
+New food will be spawned at the end of each tick to ensure there is always at least 5 food with a health value greater than zero.
 
 ## Observing
 
-The full game state is not immediately available to snakes. They can only observe a single position in the arena at once. There is no limit to how often a snake can observe, except for the CPU cycles consumed from the running code.
+Snakes can observe a single position in the arena to determine what is at that location. There is no limit to how often a snake can observe, except for the CPU cycles consumed from the running code.
 
 ## Splitting
 
