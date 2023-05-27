@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -e
+rm -rf snake_vm_pkg
 cd ../snake_vm
 wasm-pack build
 cd ../snake_web
