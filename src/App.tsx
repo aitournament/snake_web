@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 // import {Button} from "@material-ui/core";
 import FileInput from "./FileInput";
 import { alpha, AppBar, Box, Button, Container, createTheme, Divider, IconButton, Menu, MenuItem, rgbToHex, SvgIcon, Tab, Tabs, ThemeProvider, Toolbar, Typography } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import LogoIcon from './img/aitournament.svg';
+// import MenuIcon from '@mui/icons-material/Menu';
+// import LogoIcon from './img/aitournament.svg';
 import { Link, Route, Routes } from 'react-router-dom';
 import PlayPage from './pages/play/Play';
+import DocsPage from './pages/docs/Docs';
 
 // type SnakeVm = typeof import("snake_vm") | null;
 
@@ -112,7 +113,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Typography>HOME</Typography>} />
           <Route path="/play" element={<PlayPage/>} />
-          <Route path="/docs" element={<Typography>DOCS</Typography>} />
+          <Route path="/docs" element={<DocsPage/>} />
         </Routes>
 
         {/* {!snakeVm &&

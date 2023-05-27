@@ -10570,8 +10570,8 @@
     "astral-regex" "^2.0.0"
     "is-fullwidth-code-point" "^3.0.0"
 
-"snake_vm@file:../snake_vm/pkg":
-  "resolved" "file:../snake_vm/pkg"
+"snake_vm@file:snake_vm_pkg":
+  "resolved" "file:snake_vm_pkg"
   "version" "0.1.0"
 
 "snapdragon-node@^2.0.1":

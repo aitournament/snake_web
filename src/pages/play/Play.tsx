@@ -86,7 +86,7 @@ export default function PlayPage() {
   }, []);
 
   (global as any).onEvent = (event: EventEnvelope) => {
-    console.log("New event:", event);
+    // console.log("New event:", event);
     setEvents((prevEvents => [event, ...prevEvents]));
   }
 

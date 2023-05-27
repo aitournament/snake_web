@@ -24,7 +24,7 @@
     "react-scripts": "4.0.3",
     "react-virtualized": "^9.22.3",
     "react-window": "^1.8.9",
-    "snake_vm": "file:../snake_vm/pkg",
+    "snake_vm": "file:snake_vm_pkg",
     "typescript": "^4.3.5",
     "web-vitals": "^1.1.2"
   },
