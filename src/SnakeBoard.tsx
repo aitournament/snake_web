@@ -1,5 +1,5 @@
-const WIDTH = 30;
-const HEIGHT = 20;
+const WIDTH = 31;
+const HEIGHT = 21;
 
 const TILE_SIZE = 20;
 
