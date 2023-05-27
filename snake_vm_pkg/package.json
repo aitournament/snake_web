@@ -1,0 +1,19 @@
+{
+  "name": "snake_vm",
+  "collaborators": [
+    "Nathan Fox <fuchsnj@gmail.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "snake_vm_bg.wasm",
+    "snake_vm.js",
+    "snake_vm_bg.js",
+    "snake_vm.d.ts"
+  ],
+  "module": "snake_vm.js",
+  "types": "snake_vm.d.ts",
+  "sideEffects": [
+    "./snake_vm.js",
+    "./snippets/*"
+  ]
+}
