@@ -1,0 +1,6 @@
+[book]
+authors = ["Nathan Fox"]
+language = "en"
+multilingual = false
+src = "src"
+title = "AiTournament Snake Docs"

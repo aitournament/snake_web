@@ -52,12 +52,12 @@ function App() {
 
 
   const pages = [
+    // {
+    //   link: "play",
+    //   name: "Play"
+    // },
     {
-      link: "play",
-      name: "Play"
-    },
-    {
-      link: "docs",
+      link: "/docs",
       name: "Docs"
     },
   ];
@@ -96,13 +96,13 @@ function App() {
                 },
               }}>
                 <Divider orientation="vertical" variant="middle" flexItem sx={{ borderColor: 'grey.800' }} />
-                <Link to={page.link} style={{ textDecoration: 'none' }}>
+                <a href={page.link} style={{ textDecoration: 'none' }}>
                   <Button
                     sx={{ my: 2, color: "white", display: "block" }}
                   >
                     <Typography variant="h6">{page.name}</Typography>
                   </Button>
-                </Link>
+                </a>
 
               </Box>
             ))}
@@ -111,9 +111,9 @@ function App() {
           {/* </Container> */}
         </AppBar>
         <Routes>
-          <Route path="/" element={<Typography>HOME</Typography>} />
-          <Route path="/play" element={<PlayPage/>} />
-          <Route path="/docs" element={<DocsPage/>} />
+          <Route path="/" element={<PlayPage/>} />
+          {/* <Route path="/play" element={<PlayPage/>} /> */}
+          {/* <Route path="/docs" element={<DocsPage/>} /> */}
         </Routes>
 
         {/* {!snakeVm &&
