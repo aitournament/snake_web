@@ -47,7 +47,7 @@ export default function SnakeBoard(props: SnakeBoardProps) {
   >
     {props.state.food.map((food, i) => {
       let color = food.healthValue >= 0 ? "green" : "yellow";
-      let size = Math.max((Math.abs(food.healthValue) / 100) * 1.2, 0.20);
+      let size = Math.max((Math.abs(food.healthValue) / 50) * 0.7, 0.20);
 
       return <>  
       <circle
