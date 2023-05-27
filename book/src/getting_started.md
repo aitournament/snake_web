@@ -4,7 +4,7 @@ A WebAssembly file needs to be created to decide actions in the game. A [Rust SD
 
 A full [example](https://github.com/aitournament/snake_example) is available to help you get started. Below we will go over how to start a new program from scratch.
 
-You can also download the pre-compiled [snake_example](https://aitournament.github.io/snake_example/snake_example.wasm) if you want to start playing right away, or just use it as an opponent for testing. 
+You can also download the pre-compiled [snake_example.wasm](https://aitournament.github.io/snake_example/snake_example.wasm) if you want to start playing right away, or just use it as an opponent for testing. 
 
 ## Setup system dependencies
 
