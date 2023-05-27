@@ -48,10 +48,8 @@ jobs:
       - name: Build docs
         working-directory: book
         run: mdbook build
-      - name: Rename book index.html to docs.html
-        run: mv book/book/index.html book/book/docs.html
       - name: Merge React and docs site
-        run: cp -r book/book/* build
+        run: cp -r book/book/* build/docs
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
