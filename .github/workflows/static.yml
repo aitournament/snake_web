@@ -48,6 +48,7 @@ jobs:
       - name: Build docs
         working-directory: book
         run: mdbook build
+      - run: mkdir build/docs
       - name: Merge React and docs site
         run: cp -r book/book/* build/docs
       - name: Upload artifact
