@@ -43,11 +43,11 @@ export default function HistoryTable(props: HistoryTableProps) {
 
     return <Box>
     <Box style={{display: "flex", justifyContent: "center"}}>
-        <h1 style={{color: "red", marginLeft: 10, marginRight: 10}}>{redWins}</h1>
-        <h1 style={{color: "white"}}>|</h1>
+        <h1 style={{color: "#ff8888", marginLeft: 10, marginRight: 10}}>{redWins}</h1>
+        <h1 style={{color: "#424242"}}>|</h1>
         <h1 style={{color: "white", marginLeft: 10, marginRight: 10}}>{ties}</h1>
-        <h1 style={{color: "white"}}>|</h1>
-        <h1 style={{color: "blue", marginLeft: 10, marginRight: 10}}>{blueWins}</h1>
+        <h1 style={{color: "#424242"}}>|</h1>
+        <h1 style={{color: "#8888ff", marginLeft: 10, marginRight: 10}}>{blueWins}</h1>
     </Box>
     <TableContainer component={Paper} style={{width: 800, margin: 'auto'}}>
         <Table aria-label="simple table">
@@ -65,9 +65,9 @@ export default function HistoryTable(props: HistoryTableProps) {
                 if (row.winner == WinResult.Tie) {
                     winner = <p style={{color: "white"}}>TIE</p>
                 } else if (row.winner === WinResult.Blue) {
-                    winner = <p style={{color: "blue", margin: 0}}>BLUE</p>;
+                    winner = <p style={{color: "#8888ff", margin: 0}}>BLUE</p>;
                 } else {
-                    winner = <p style={{color: "red", margin: 0}}>RED</p>;
+                    winner = <p style={{color: "#ff8888", margin: 0}}>RED</p>;
                 }
                 
 

@@ -183,7 +183,7 @@ export default function PlayPage() {
         <WasmInput
           editable={true}
           snake_vm={snakeVm}
-          color='red'
+          color='#ff8888'
           onChange={(filename, bytes) => {
             setWasm(1, filename, bytes);
           }} />
@@ -199,7 +199,7 @@ export default function PlayPage() {
         <WasmInput
           editable={true}
           snake_vm={snakeVm}
-          color='blue'
+          color='#8888ff'
           onChange={(filename, bytes) => {
             setWasm(2, filename, bytes);
           }} />
@@ -209,8 +209,8 @@ export default function PlayPage() {
         <SnakeBoard state={boardState} />
         {boardState.winner.type !== "pending" && <Box sx={{ my: 3 }}>
           {boardState.winner.type === "tie" && <Typography variant="h5">TIE</Typography>}
-          {boardState.winner.type === "win" && boardState.winner.data === 0 && <Typography variant="h4" style={{ color: 'red' }}>RED WON</Typography>}
-          {boardState.winner.type === "win" && boardState.winner.data === 1 && <Typography variant="h4" style={{ color: 'blue' }}>BLUE WON</Typography>}
+          {boardState.winner.type === "win" && boardState.winner.data === 0 && <Typography variant="h4" style={{ color: '#ff8888' }}>RED WON</Typography>}
+          {boardState.winner.type === "win" && boardState.winner.data === 1 && <Typography variant="h4" style={{ color: '#8888ff' }}>BLUE WON</Typography>}
         </Box>}
         <Box sx={{ my: 3 }}>
 

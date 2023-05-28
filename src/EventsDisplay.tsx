@@ -136,7 +136,6 @@ function getEventMessage(event: Event): JSX.Element {
     switch (event.type) {
         case "SNAKE_ADDED": {
             let data = event.data;
-            // let color = data.teamId == 0 ? "Red" : "Blue";
             return <p>{getColor(data.teamId)} snake {snakeId(data.snakeId)} added at {pos(data.head)}</p>;
         }
         case "FOOD_ADDED": {
@@ -171,7 +170,7 @@ function getEventMessage(event: Event): JSX.Element {
 }
 
 function getColor(teamId: number): JSX.Element {
-    return teamId == 0 ? <span style={{color: 'red'}}>Red</span> : <span style={{color: 'blue'}}>Blue</span>;
+    return teamId == 0 ? <span style={{color: '#ff8888'}}>Red</span> : <span style={{color: '#8888ff'}}>Blue</span>;
 }
 
 function snakeId(id: number): JSX.Element {

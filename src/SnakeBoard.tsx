@@ -82,14 +82,11 @@ export default function SnakeBoard(props: SnakeBoardProps) {
   let elements = [];
   for(let snake_i = 0; snake_i < props.state.snakes.length; snake_i += 1) {
     let snake = props.state.snakes[snake_i];
-    let color = snake.team_id == 0 ? 'red': 'blue';
+    let color = snake.team_id == 0 ? '#ff4242': '#4242ff';
 
     for(let body_i = 0; body_i < snake.body.length; body_i += 1) {
       let size = body_i == 0? 0.7 : 0.5;
       let {x, y} = snake.body[body_i];
-
-      // let cx = x * TILE_SIZE + TILE_SIZE / 2;
-      // let cy = y * TILE_SIZE + TILE_SIZE / 2;
 
       elements.push(<circle
         key={`${x}.${y}`}
