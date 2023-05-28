@@ -2,7 +2,7 @@ import { Box, ListItem, ListItemButton, ListItemText, Paper, Typography } from "
 import { useEffect, useState } from "react";
 // import { List } from "react-virtualized";
 import List from "@mui/material/List";
-import { EventEnvelope, Event, Pos } from "./event";
+import { EventEnvelope, Event, Pos, SnakeDiedEvent } from "./event";
 import TimestampDisplay from "./Timestamp";
 // import { VirtualizedTable } from "./VirtualizedTable";
 import { FixedSizeList, ListChildComponentProps } from "react-window";
@@ -39,7 +39,7 @@ export default function EventsDisplay(props: EventsDisplayProps) {
 
     return <Paper sx={{backgroundColor: 'grey.800'}}>
         <FixedSizeList
-        height={300}
+        height={200}
         width={800}
         itemSize={24}
         itemData={props.eventEnvelopes}
@@ -74,6 +74,64 @@ function EventRow(props: EventRowProps) {
     </Box>;
 }
 
+export function getSnakeDiedReason(event: SnakeDiedEvent): string {
+    switch (event.reason.type) {
+        case "TOO_SMALL_TO_SPLIT": {
+            return "too small to split";
+        }
+        case "COLLISION": {
+            return "collision";
+        }
+        case "MOVE_OUT_OF_BOUNDS": {
+            return "out of bounds move";
+        }
+        case "NOT_READY_TO_LEAP": {
+            return "illegal leap";
+        }
+        case "NOT_READY_TO_MOVE": {
+            return "illegal move";
+        }
+        case "ZERO_HEALTH": {
+            return event.reason.data.type == "EAT" ? "zero health (ate poison)" : "zero health (hunger)";
+        }
+        case "EXECUTION_FAILURE": {
+            switch (event.reason.data.type) {
+                case "MAIN_EXITED": {
+                    return "code ended";
+                }
+                case "UNREACHABLE": {
+                    return "code panic";
+                }
+                case "STACK_OVERFLOW": {
+                    return "stack overflow";
+                }
+                case "MEMORY_SIZE_EXCEEDED": {
+                    return "out of memory";
+                }
+                case "OUT_OF_BOUNDS_MEMORY_ACCESS": {
+                    return "illegal memory access";
+                }
+                case "DIVIDE_BY_ZERO": {
+                    return "divide by zero";
+                }
+                case "OUT_OF_BOUNDS_TABLE_ACCESS": {
+                    return "illegal table access";
+                }
+                case "INVALID_INDIRECT_CALL_TARGET": {
+                    return "invalid indirect call target";
+                }
+                case "UNIMPLEMENTED": {
+                    return "Internal VM error. This is a bug, please report";
+                }
+                case "INVALID_FUNCTION_INPUT": {
+                    return "invalid function call";
+                }
+            }
+        }
+    }
+    return "unknown";
+}
+
 function getEventMessage(event: Event): JSX.Element {
     switch (event.type) {
         case "SNAKE_ADDED": {
@@ -101,78 +159,7 @@ function getEventMessage(event: Event): JSX.Element {
         }
         case "SNAKE_DIED": {
             let data = event.data;
-
-            let reason;
-            switch (data.reason.type) {
-                case "TOO_SMALL_TO_SPLIT": {
-                    reason = "too small to split";
-                    break;
-                }
-                case "COLLISION": {
-                    reason = "collision";
-                    break;
-                }
-                case "MOVE_OUT_OF_BOUNDS": {
-                    reason = "out of bounds move";
-                    break;
-                }
-                case "NOT_READY_TO_LEAP": {
-                    reason = "illegal leap";
-                    break;
-                }
-                case "NOT_READY_TO_MOVE": {
-                    reason = "illegal move";
-                    break;
-                }
-                case "ZERO_HEALTH": {
-                    reason = data.reason.data.type == "EAT" ? "zero health (ate poison)" : "zero health (hunger)";
-                    break;
-                }
-                case "EXECUTION_FAILURE": {
-                    switch (data.reason.data.type) {
-                        case "MAIN_EXITED": {
-                            reason = "code ended";
-                            break;
-                        }
-                        case "UNREACHABLE": {
-                            reason = "code panic";
-                            break;
-                        }
-                        case "STACK_OVERFLOW": {
-                            reason = "stack overflow";
-                            break;
-                        }
-                        case "MEMORY_SIZE_EXCEEDED": {
-                            reason = "out of memory";
-                            break;
-                        }
-                        case "OUT_OF_BOUNDS_MEMORY_ACCESS": {
-                            reason = "illegal memory access";
-                            break;
-                        }
-                        case "DIVIDE_BY_ZERO": {
-                            reason = "divide by zero";
-                            break;
-                        }
-                        case "OUT_OF_BOUNDS_TABLE_ACCESS": {
-                            reason = "illegal table access";
-                            break;
-                        }
-                        case "INVALID_INDIRECT_CALL_TARGET": {
-                            reason = "invalid indirect call target";
-                            break;
-                        }
-                        case "UNIMPLEMENTED": {
-                            reason = "Internal VM error. This is a bug, please report";
-                            break;
-                        }
-                        case "INVALID_FUNCTION_INPUT": {
-                            reason = "invalid function call";
-                            break;
-                        }
-                    }
-                }
-            }
+            let reason = getSnakeDiedReason(data);
             return <p>{getColor(data.teamId)} snake {snakeId(data.snakeId)} died ({reason})</p>
         }
         default: {

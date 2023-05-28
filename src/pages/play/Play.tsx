@@ -9,7 +9,8 @@ import ReplayIcon from '@mui/icons-material/Replay';
 // import ReactVirtualizedTable from "../../ReactVirutalizedTable";
 import Timestamp from "../../Timestamp";
 import { EventEnvelope, Event } from "../../event";
-import EventsDisplay from "../../EventsDisplay";
+import EventsDisplay, { getSnakeDiedReason } from "../../EventsDisplay";
+import HistoryTable, { HistoryItem, WinResult } from "../../HistoryTable";
 import { TextField } from "@mui/material";
 import CasinoIcon from '@mui/icons-material/Casino';
 
@@ -26,7 +27,15 @@ enum State {
   Play,
 }
 
-
+function getWinReason(events: EventEnvelope[]): string {
+  for(let i = 0; i<events.length; i += 1) {
+    let event = events[i].event;
+    if (event.type == "SNAKE_DIED") {
+      return getSnakeDiedReason(event.data);
+    }
+  }
+  return "unknown";
+}
 
 export default function PlayPage() {
   const CPU_CYCLES_PER_SEC = 60000;
@@ -49,6 +58,7 @@ export default function PlayPage() {
   let [speed, setSpeed] = useState(1);
   let [events, setEvents] = useState<EventEnvelope[]>([]);
   let [seed, setSeed] = useState<number>(0);
+  let [history, setHistory] = useState<HistoryItem[]>([]);
 
   function resetBoard() {
     snakeVm!.reset(seed);
@@ -64,6 +74,7 @@ export default function PlayPage() {
 
   useEffect(() => {
     let readyToPlay = Boolean(wasm1?.bytes && wasm2?.bytes);
+    setHistory([]);
     switch (state) {
       case State.SelectWasm: {
         if (readyToPlay) {
@@ -71,7 +82,6 @@ export default function PlayPage() {
         }
         break;
       }
-
     }
   }, [wasm1, wasm2]);
 
@@ -119,13 +129,29 @@ export default function PlayPage() {
     }
   }, [running, speed]);
 
+  // Game ended
   useEffect(() => {
     if (boardState.winner.type !== "pending") {
-      // console.log("STOP RUNNING: game over: ", boardState.winner);
+      let winnerId = boardState.winner.type === "tie" ? 0 : boardState.winner.data;
       setRunning(false);
-    }
-  }, [boardState]);
 
+      setHistory((prev) => {
+        for(let i = 0; i<prev.length; i += 1) {
+          if (prev[i].seed == seed) {
+            return prev;
+          }
+        }
+
+        let new_history = {
+          seed: seed,
+          winner: boardState.winner.type === "tie" ? WinResult.Tie : winnerId === 0 ? WinResult.Red : WinResult.Blue,
+          reason: getWinReason(events)
+        };
+        return [new_history, ...prev];
+      });
+
+    }
+  }, [boardState.winner.type]);
 
   if (!snakeVm) {
     return <Typography>
@@ -272,6 +298,9 @@ export default function PlayPage() {
               m: 5
             }}>
             <EventsDisplay eventEnvelopes={events} />
+          </Box>
+          <Box>
+            <HistoryTable items={history} setSeed={setSeed}/>
           </Box>
 
 
