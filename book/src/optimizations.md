@@ -1,6 +1,6 @@
 # Optimizations
 
-There are a few optimizations that can be done to help minimize the size of the WASM file and potentially speed up execution. Snake is a real-time game, which means a bit of extra performance could be the difference between winning and losing.
+The WASM files may become quite large. There is a limit of 5 MB. If you start running into that limit, here are a few things you can try.
 
 ## Remove panic unwinding
 
@@ -15,7 +15,7 @@ panic = "abort"
 
 ## Disable  the Rust standard library
 
-The Rust stdlib is very useful and gives you access to things like memory allocation. The stdlib is also very large. You can disable it by adding the following to `lib.rs`
+The Rust stdlib is very useful and gives you access to things like memory allocation. It's also very large. You can disable it by adding the following to `lib.rs`
 
 ```rust
 // src/lib.rs
