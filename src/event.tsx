@@ -10,9 +10,16 @@ export interface EventEnvelope {
 export type Event = 
 {type: "SNAKE_ADDED", data: SnakeAddedEvent} |
 {type: "FOOD_ADDED", data: FoodAddedEvent} |
-{type: "SNAKE_SLEEP", data: SnakeSleepEvent}|
-{type: "SNAKE_MOVED", data: SnakeMovedEvent}|
+{type: "SNAKE_SLEEP", data: SnakeSleepEvent} |
+{type: "SNAKE_MOVED", data: SnakeMovedEvent} |
+{type: "SNAKE_SPLIT", data: SnakeSplitEvent} |
 {type: "SNAKE_DIED", data: SnakeDiedEvent};
+
+export interface SnakeSplitEvent {
+    teamId: number,
+    frontSnake: Pos,
+    backSnake: Pos
+}
 
 export interface Timestamp {
     tick: number,

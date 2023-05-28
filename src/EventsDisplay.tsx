@@ -95,6 +95,10 @@ function getEventMessage(event: Event): JSX.Element {
             let description = data.forced ? "was forced to move" : (data.leap ? "leaped" : "moved");
             return <p>{getColor(data.teamId)} snake {snakeId(data.snakeId)} {description} from {pos(data.from)} to {pos(data.to)}</p>;
         }
+        case "SNAKE_SPLIT": {
+            let data = event.data;
+            return <p>{getColor(data.teamId)} snake split into two!</p>;
+        }
         case "SNAKE_DIED": {
             let data = event.data;
 
