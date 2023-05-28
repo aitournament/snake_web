@@ -10,6 +10,8 @@ import ReplayIcon from '@mui/icons-material/Replay';
 import Timestamp from "../../Timestamp";
 import { EventEnvelope, Event } from "../../event";
 import EventsDisplay from "../../EventsDisplay";
+import { TextField } from "@mui/material";
+import CasinoIcon from '@mui/icons-material/Casino';
 
 export type SnakeVm = typeof import("snake_vm") | null;
 
@@ -44,13 +46,12 @@ export default function PlayPage() {
   let [wasm2, setWasm2] = useState<WasmFile | null>(null);
   let [state, setState] = useState<State>(State.SelectWasm);
   let [running, setRunning] = useState(false);
-  // let [vmClock, setVmClock] = useState(0);
   let [speed, setSpeed] = useState(1);
   let [events, setEvents] = useState<EventEnvelope[]>([]);
+  let [seed, setSeed] = useState<number>(0);
 
-  // let readyForStart = Boolean(wasm1 && wasm2);
   function resetBoard() {
-    snakeVm!.reset(0);
+    snakeVm!.reset(seed);
     setEvents([]);
     setRunning(false);
 
@@ -66,7 +67,6 @@ export default function PlayPage() {
     switch (state) {
       case State.SelectWasm: {
         if (readyToPlay) {
-          //TODO: allow setting the seed
           resetBoard();
         }
         break;
@@ -75,6 +75,11 @@ export default function PlayPage() {
     }
   }, [wasm1, wasm2]);
 
+  useEffect(() => {
+    if (snakeVm && wasm1 && wasm2) {
+      resetBoard();
+    }
+  }, [seed, snakeVm, wasm1, wasm2])
 
   useEffect(() => {
     import('snake_vm').then((snakeVm) => {
@@ -137,6 +142,8 @@ export default function PlayPage() {
     }
   }
 
+  let gameIsOver = boardState.winner.type !== "pending";
+
   return <>
     <Container>
       <Box
@@ -172,25 +179,6 @@ export default function PlayPage() {
           }} />
       </Box>
 
-
-      {/* {readyForStart && <Button variant="contained"
-        component="label"
-        color="secondary"
-        sx={{
-          fontSize: "30px",
-          borderRadius: 2
-        }}
-        onClick={() => {
-          snakeVm?.add_starting_snake(wasm1!.bytes!, 0);
-          snakeVm?.add_starting_snake(wasm1!.bytes!, 1);
-          setState(State.Play);
-          setBoardState(snakeVm?.get_state());
-        }}
-      >
-        START
-      </Button>} */}
-
-
       {state === State.Play && <Box>
         <SnakeBoard state={boardState} />
         {boardState.winner.type !== "pending" && <Box sx={{ my: 3 }}>
@@ -205,7 +193,7 @@ export default function PlayPage() {
           }}>
             <ReplayIcon color="info" />
           </Button>
-          {!running && <Button variant="contained" sx={{ m: 1 }} onClick={() => { setRunning(true); }}>
+          {!running && !gameIsOver && <Button variant="contained" sx={{ m: 1 }} onClick={() => { setRunning(true); }}>
             <PlayArrowIcon color="success" />
           </Button>}
 
@@ -242,6 +230,40 @@ export default function PlayPage() {
 
           <Timestamp timestamp={boardState.timestamp} />
 
+          <Box 
+          style={{margin: 24}}
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          >
+
+          <TextField
+            id="outlined-basic"
+            label="Seed"
+            variant="outlined"
+            size="small"
+            color="secondary"
+            value={seed}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              let parsed = parseInt(event.target.value || "0", 10);
+              if (!isNaN(parsed) && parsed <= 4294967295) {
+                setSeed(parsed);
+              }
+            }}
+            disabled={running}
+          />
+          <Button
+            variant="contained"
+            sx={{ m: 1 }}
+            style={{display: running ? "none" : "flex"}}
+            onClick={() => {
+              setSeed(Math.floor(Math.random() * 4294967295))
+            }
+          }>
+            <CasinoIcon color="secondary" />
+          </Button>
+        </Box>
+
           <Box
             display="flex"
             justifyContent="center"
@@ -264,38 +286,3 @@ export default function PlayPage() {
     </Container>
   </>;
 }
-
-
-{/* {snakeVm && numSnakes < 2 &&
-          <div>
-            <FileInput onChange={(filename, buffer) => {
-              try {
-                snakeVm?.add_starting_snake(new Uint8Array(buffer), numSnakes);
-                setNumSnakes(numSnakes + 1);
-                setBoardState(snakeVm?.get_state());
-
-              } catch (e) {
-                console.log("Error:", e);
-              }
-            }}>
-              Player {numSnakes + 1} WASM
-            </FileInput>
-          </div>
-        }
-        {snakeVm && numSnakes >= 2 && <div>
-          <SnakeBoard
-            state={boardState}
-          />
-          <br />
-          <Button
-            variant='contained'
-            onClick={() => {
-              // for (let i = 0; i < 60000; i++) {
-              snakeVm?.step(60000);
-              // }
-              setBoardState(snakeVm?.get_state())
-            }}
-          >
-            Play
-          </Button>
-        </div>} */}
