@@ -102,17 +102,17 @@ export function __wbg_log_fb0e74ae0e54f80f(arg0, arg1) {
     console.log(getStringFromWasm0(arg0, arg1));
 };
 
-export function __wbindgen_json_parse(arg0, arg1) {
-    var ret = JSON.parse(getStringFromWasm0(arg0, arg1));
-    return addHeapObject(ret);
-};
-
 export function __wbg_onEvent_d1f98e755a83e1e6(arg0) {
     onEvent(takeObject(arg0));
 };
 
 export function __wbindgen_string_new(arg0, arg1) {
     var ret = getStringFromWasm0(arg0, arg1);
+    return addHeapObject(ret);
+};
+
+export function __wbindgen_json_parse(arg0, arg1) {
+    var ret = JSON.parse(getStringFromWasm0(arg0, arg1));
     return addHeapObject(ret);
 };
 
