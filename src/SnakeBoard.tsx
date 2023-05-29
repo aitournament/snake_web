@@ -23,6 +23,7 @@ type Winner = {type: "win", data: number} | {type: "pending"} | {type: "tie"};
 
 export interface BoardState {
   food: Food[],
+  poison: Food[],
   snakes: Snake[],
   winner: Winner,
   timestamp: Timestamp
@@ -112,7 +113,6 @@ export default function SnakeBoard(props: SnakeBoardProps) {
       style={{border: '1px solid gray'}}
   >
     {props.state.food.map((food, i) => {
-      let color = food.healthValue > 0 ? "green" : "yellow";
       let size = Math.max((Math.abs(food.healthValue) / 50) * 0.7, 0.20);
 
       return <>  
@@ -121,7 +121,20 @@ export default function SnakeBoard(props: SnakeBoardProps) {
           cx={food.pos.x * TILE_SIZE + TILE_SIZE / 2}
           cy={food.pos.y * TILE_SIZE + TILE_SIZE / 2}
           r={(TILE_SIZE / 2) * size}
-          fill={color}/>
+          fill="green"/>
+          
+      </>;
+    })}
+    {props.state.poison.map((food, i) => {
+      let size = Math.max((Math.abs(food.healthValue) / 50) * 0.7, 0.20);
+
+      return <>  
+      <circle
+          key={i}
+          cx={food.pos.x * TILE_SIZE + TILE_SIZE / 2}
+          cy={food.pos.y * TILE_SIZE + TILE_SIZE / 2}
+          r={(TILE_SIZE / 2) * size}
+          fill="yellow"/>
           
       </>;
     })}

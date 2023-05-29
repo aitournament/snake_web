@@ -43,6 +43,7 @@ export default function PlayPage() {
   let [snakeVm, setSnakeVm] = useState<SnakeVm>(null);
   let [boardState, setBoardState] = useState<BoardState>({
     food: [],
+    poison: [],
     snakes: [],
     winner: { type: "pending" },
     timestamp: {
