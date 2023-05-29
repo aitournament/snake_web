@@ -69,7 +69,7 @@ export interface NotReadyToMoveData {
 }
 
 export type HealthDeathReason = 
-{type: "EAT"} |
+{type: "POISON"} |
 {type: "TIME"};
 
 export type ExecutionFailure = 

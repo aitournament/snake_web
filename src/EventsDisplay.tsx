@@ -92,7 +92,7 @@ export function getSnakeDiedReason(event: SnakeDiedEvent): string {
             return "illegal move";
         }
         case "ZERO_HEALTH": {
-            return event.reason.data.type == "EAT" ? "zero health (ate poison)" : "zero health (hunger)";
+            return event.reason.data.type == "POISON" ? "zero health (ate poison)" : "zero health (hunger)";
         }
         case "EXECUTION_FAILURE": {
             switch (event.reason.data.type) {
