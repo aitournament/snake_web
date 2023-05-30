@@ -19,7 +19,7 @@ The snake runtime is 100% deterministic. Replaying the same game with the same W
 
 ## Moves
 
-Every snake is _required_ to move every tick. You may choose to move any time during the tick that you wish. However, if a snake fails to move it will be _forced_ to move at the end of the tick (in the direction currently set for the snake).
+Every snake is _required_ to move every tick. However, you may choose to move any time during the tick that you wish. If a snake fails to move it will be _forced_ to move at the end of the tick (in the direction currently set for the snake).
 
 Colliding with the walls of the arena, or another snake, will result in the death of the snake.
 
@@ -27,7 +27,7 @@ Moving on top of food will consume the food and immediately heal and grow the sn
 
 If the snake's head is on top of poison at the end of a tick, it will be damaged, potentially killing the snake. Poison is permanent and will not be consumed.
 
-Moves for snakes are resolved after every CPU cycle. It is possible that multiple snakes move on the exact same CPU cycle. Those moves will be resolved simultaneously. In rare cases, multiple snakes may try to move onto the same position on the same CPU cycle, which will result in both of them dying.
+Moves for snakes are resolved after every CPU cycle. It is possible that multiple snakes move on the exact same CPU cycle. Those moves will be resolved simultaneously. In rare cases, multiple snakes may try to move onto the same position on the same CPU cycle, which will result in all of them dying.
 
 An additional move (called a leap) may occur at most once every 2 ticks. A leap must occur after a move has already been performed in the same tick. A leap uses extra energy from the snake, which will result in the snake losing the last section of its tail (which will become poison).
 
