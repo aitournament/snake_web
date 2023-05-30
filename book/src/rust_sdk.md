@@ -39,6 +39,6 @@ extern "C" fn main() {
 
 ## Raw functions
 
-The raw `extern "C"` functions are available in the [raw](https://sdk.snake.aitournament.com/snake_sdk/raw/index.html) module of the SDK. These unsafe functions _can_ be used directly, but they mostly exist as a reference if you want to use another language without the [Rust SDK][rust_sdk].
+The raw `extern "C"` functions are available in the [raw](https://sdk.snake.aitournament.com/snake_sdk/raw/index.html) module of the SDK. These unsafe functions _can_ be used directly, but they mostly exist as a reference to document the wasm interface if you want to use another language without the [Rust SDK][rust_sdk].
 
 [rust_sdk]: https://github.com/aitournament/snake_sdk

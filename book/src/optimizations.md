@@ -1,6 +1,6 @@
 # Optimizations
 
-The WASM files may become quite large. There is a limit of 5 MB. If you start running into that limit, here are a few things you can try.
+The WASM files may become quite large. If you start running into the 5 MB limit, here are a few things you can try.
 
 ## Remove panic unwinding
 
