@@ -58,7 +58,7 @@ export default function PlayPage() {
   let [running, setRunning] = useState(false);
   let [speed, setSpeed] = useState(1);
   let [events, setEvents] = useState<EventEnvelope[]>([]);
-  let [seed, setSeed] = useState<number>(0);
+  let [seed, setSeed] = useState<number>(Math.floor(Math.random() * 4294967295));
   let [history, setHistory] = useState<HistoryItem[]>([]);
 
   function resetBoard() {
@@ -205,6 +205,13 @@ export default function PlayPage() {
             setWasm(2, filename, bytes);
           }} />
       </Box>
+      {state === State.SelectWasm && <Box>
+        <Typography variant="h6" style={{margin: 20}}>Select two WebAssembly files</Typography>
+        {/* <hr/> */}
+        <Typography variant="body1">Don't have one yet? Try out <a href="https://aitournament.github.io/snake_example/snake_example.wasm">snake_demo.wasm</a></Typography>
+        <Typography variant="body1">or read the <a href="/docs">docs</a> to learn how to make your own.</Typography>
+        
+      </Box>}
 
       {state === State.Play && <Box>
         <SnakeBoard state={boardState} />
