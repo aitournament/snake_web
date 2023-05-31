@@ -79,7 +79,7 @@ function bodyConnector(
 }
 
 export default function SnakeBoard(props: SnakeBoardProps) {
-  console.log('State: ', props.state);
+  // console.log('State: ', props.state);
 
   let elements = [];
   for(let snake_i = 0; snake_i < props.state.snakes.length; snake_i += 1) {
