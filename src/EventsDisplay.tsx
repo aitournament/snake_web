@@ -80,10 +80,10 @@ export function getSnakeDiedReason(event: SnakeDiedEvent): string {
             return "too small to split";
         }
         case "COLLISION": {
-            return "collision";
+            return "collision: snake";
         }
         case "MOVE_OUT_OF_BOUNDS": {
-            return "out of bounds move";
+            return "collision: arena";
         }
         case "NOT_READY_TO_LEAP": {
             return "illegal leap";
@@ -92,7 +92,7 @@ export function getSnakeDiedReason(event: SnakeDiedEvent): string {
             return "illegal move";
         }
         case "ZERO_HEALTH": {
-            return event.reason.data.type == "POISON" ? "zero health (ate poison)" : "zero health (hunger)";
+            return event.reason.data.type == "POISON" ? "zero health (poison)" : "zero health (hunger)";
         }
         case "EXECUTION_FAILURE": {
             switch (event.reason.data.type) {
@@ -100,7 +100,7 @@ export function getSnakeDiedReason(event: SnakeDiedEvent): string {
                     return "code ended";
                 }
                 case "UNREACHABLE": {
-                    return "code panic";
+                    return "unreachable executed";
                 }
                 case "STACK_OVERFLOW": {
                     return "stack overflow";
@@ -118,10 +118,10 @@ export function getSnakeDiedReason(event: SnakeDiedEvent): string {
                     return "illegal table access";
                 }
                 case "INVALID_INDIRECT_CALL_TARGET": {
-                    return "invalid indirect call target";
+                    return "illegal indirect call target";
                 }
                 case "UNIMPLEMENTED": {
-                    return "Internal VM error. This is a bug, please report";
+                    return "internal VM error: this is a bug, please report";
                 }
                 case "INVALID_FUNCTION_INPUT": {
                     return "invalid function call";

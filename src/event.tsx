@@ -58,15 +58,11 @@ export type SnakeDeathReason =
 {type: "TOO_SMALL_TO_SPLIT"} |
 {type: "MOVE_OUT_OF_BOUNDS"} |
 {type: "NOT_READY_TO_LEAP"} |
-{type: "NOT_READY_TO_MOVE", data: NotReadyToMoveData} |
+{type: "NOT_READY_TO_MOVE"} |
 {type: "ZERO_HEALTH", data: HealthDeathReason} |
 {type: "EXECUTION_FAILURE", data: ExecutionFailure} |
 {type: "COLLISION", data: CollisionData} |
 {type: "SUICIDE"};
-
-export interface NotReadyToMoveData {
-    forcedMove: boolean
-}
 
 export type HealthDeathReason = 
 {type: "POISON"} |

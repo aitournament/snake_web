@@ -26,7 +26,8 @@ export interface BoardState {
   poison: Food[],
   snakes: Snake[],
   winner: Winner,
-  timestamp: Timestamp
+  timestamp: Timestamp,
+  loseReason?: string
 }
 
 export interface Snake {

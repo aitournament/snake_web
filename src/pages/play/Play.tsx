@@ -146,7 +146,7 @@ export default function PlayPage() {
         let new_history = {
           seed: seed,
           winner: boardState.winner.type === "tie" ? WinResult.Tie : winnerId === 0 ? WinResult.Red : WinResult.Blue,
-          reason: getWinReason(events)
+          reason: boardState.loseReason || "unknown"
         };
         return [new_history, ...prev];
       });
