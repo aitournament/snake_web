@@ -1,6 +1,6 @@
 # Getting Started
 
-A WebAssembly file needs to be created to decide actions in the game. A [Rust SDK][rust_sdk] ([docs][sdk_docs]) is provided, but any language can be used as long as it can be compiled to WebAssembly. The rest of this section will assume you are using Rust with the [Rust SDK][rust_sdk].
+A WebAssembly file needs to be created, which is used to control your snakes. A [Rust SDK][rust_sdk] ([docs][sdk_docs]) is provided, but any language can be used as long as it can be compiled to WebAssembly. The rest of this section will assume you are using Rust with the [Rust SDK][rust_sdk].
 
 A full [example](https://github.com/aitournament/snake_example) is available to help you get started. Below we will go over how to start a new program from scratch.
 
@@ -31,7 +31,7 @@ cargo init my_snake_program --lib
 
 ## Setup code
 
-A couple changes are needed to make the library work with snake. The first step is to add a `main` functions. Add the following to `lib.rs`
+A couple changes are needed to make the library work with snake. The first step is to add a `main` function. Add the following to `lib.rs`
 
 ```rust
 // src/lib.rs

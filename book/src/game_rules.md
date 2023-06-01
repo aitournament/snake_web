@@ -62,6 +62,12 @@ Snakes can observe a single position in the arena to determine what is at that l
 
 Once a snake has fully matured (is a size of at least 9), it is capable of splitting. A split will result in a new snake being created. The snake is split into 3 equal parts (with the middle section rounding up if not divisible by 3). The front will remain as the original snake. The middle will die and turn into (poisonous) food. The end will become a new snake. The program is forked when this happens, and both snakes continue to run independently. The new snake will start with the same health as the parent snake.
 
+## Speaking
+
+Yes, snakes can talk! This can be used for debugging, or some friendly taunting.
+
+Speaking is limited in length to 50 characters at a time, anything longer will be truncated. Each snake can speak at most twice per tick. Anything else will be ignored.
+
 ## Resource limits
 
 A WASM file has a maximum size of 5 MB. If it is too large, it will be rejected and cannot be used.
