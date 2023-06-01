@@ -66,7 +66,7 @@ Once a snake has fully matured (is a length of at least 9), it is capable of spl
 
 Yes, snakes can talk! This can be used for debugging, or some friendly taunting.
 
-Speaking is limited in length to 50 characters at a time, anything longer will be truncated. Each snake can speak at most twice per tick,nything else will be ignored.
+Speaking is limited in length to 50 characters at a time, anything longer will be truncated. Each snake can speak at most twice per tick, anything else will be ignored.
 
 ## Resource limits
 
