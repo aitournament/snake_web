@@ -13,12 +13,19 @@ export type Event =
 {type: "SNAKE_SLEEP", data: SnakeSleepEvent} |
 {type: "SNAKE_MOVED", data: SnakeMovedEvent} |
 {type: "SNAKE_SPLIT", data: SnakeSplitEvent} |
-{type: "SNAKE_DIED", data: SnakeDiedEvent};
+{type: "SNAKE_DIED", data: SnakeDiedEvent} |
+{type: "LOG", data: LogEvent};
 
 export interface SnakeSplitEvent {
     teamId: number,
     frontSnake: Pos,
     backSnake: Pos
+}
+
+export interface LogEvent {
+    snakeId: number,
+    teamId: number,
+    msg: string
 }
 
 export interface Timestamp {

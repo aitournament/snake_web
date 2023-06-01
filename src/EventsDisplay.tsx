@@ -161,12 +161,21 @@ function getEventMessage(event: Event): JSX.Element {
             let reason = getSnakeDiedReason(data);
             return <p>{getColor(data.teamId)} snake {snakeId(data.snakeId)} died ({reason})</p>
         }
+        case "LOG": {
+            let data = event.data;
+            let color = teamColor(data.teamId);
+            return <p>{getColor(data.teamId)} snake {snakeId(data.snakeId)} says: <span style={{color: color}}>{data.msg}</span></p> 
+        }
         default: {
             let event_any:any = event;
             console.log(`Type: ${event_any.type} with data: ${JSON.stringify(event_any.data)}`);
             return <p>Unknown type: ({event_any.type})</p>;
         }
     }
+}
+
+function teamColor(teamId: number): string {
+    return teamId == 0 ? "#ff8888": "#8888ff";
 }
 
 function getColor(teamId: number): JSX.Element {
