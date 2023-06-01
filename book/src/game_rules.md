@@ -15,7 +15,7 @@ Five food will be randomly placed around the arena.
 
 One tick occurs every second of game play. There are 60,000 CPU cycles executed in each tick, for each snake. The programs of each snake are ran simultaneously, in lock-step with each other. A CPU cycle is roughly equal to a single WASM op-code being executed.
 
-The snake runtime is 100% deterministic. Replaying the same game with the same WebAssembly files, initial seed, and same version of snake will have the same result. This is useful to be able to re-play games.
+The snake WASM runtime is 100% deterministic. Replaying the same game with the same WebAssembly files, initial seed, and same version of snake will have the same result. This is useful to be able to re-play games.
 
 ## Moves
 
@@ -33,7 +33,7 @@ An additional move (called a leap) may occur at most once every 2 ticks. A leap 
 
 ## Health
 
-Each snake starts with 100 health. One health is lost at the end of each tick. If a snake's health reaches 0, it immediately dies. Health can be increased by eating food, or decreased when on poison.
+Each snake starts with 100 health. One health is lost at the end of each tick. If a snake's health reaches 0, it immediately dies. Health can be increased by eating food, or decreased when standing on poison.
 
 ## Food
 
@@ -60,13 +60,13 @@ Snakes can observe a single position in the arena to determine what is at that l
 
 ## Splitting
 
-Once a snake has fully matured (is a size of at least 9), it is capable of splitting. A split will result in a new snake being created. The snake is split into 3 equal parts (with the middle section rounding up if not divisible by 3). The front will remain as the original snake. The middle will die and turn into (poisonous) food. The end will become a new snake. The program is forked when this happens, and both snakes continue to run independently. The new snake will start with the same health as the parent snake.
+Once a snake has fully matured (is a length of at least 9), it is capable of splitting. A split will result in a new snake being created. The snake is split into 3 equal parts (with the middle section rounding up if not divisible by 3). The front will remain as the original snake. The middle will die and turn into poison. The end will become a new snake. The program is forked when this happens, and both snakes continue to run independently. The new snake will start with the same health as the parent snake, as well as starting with the same move / leap eligibility.
 
 ## Speaking
 
 Yes, snakes can talk! This can be used for debugging, or some friendly taunting.
 
-Speaking is limited in length to 50 characters at a time, anything longer will be truncated. Each snake can speak at most twice per tick. Anything else will be ignored.
+Speaking is limited in length to 50 characters at a time, anything longer will be truncated. Each snake can speak at most twice per tick,nything else will be ignored.
 
 ## Resource limits
 
@@ -78,5 +78,7 @@ Programs are limited to using at most 32 WASM memory pages. Each page is 64 KB, 
 
 If the program terminates for any reason, the snake will die. This could, for example, be due to the main function returning, dividing by 0, accessing invalid memory, using an SDK function with invalid arguments, etc.
 
-There is no CPU limit, but using too many CPU cycles between moves may result in a forced move, potentially killing the snake. 
+There is no CPU limit, but using too many CPU cycles between moves may result in a forced move, potentially killing the snake.
+
+Resource limits are per snake.
 
