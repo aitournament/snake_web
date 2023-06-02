@@ -10,7 +10,20 @@ html {
 
 .App {
   text-align: center;
-  
+  flex: 1
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100%
+}
+
+body, html {
+  height: 100%
+}
+footer {
+  flex-shrink: 0;
 }
 
 .App-logo {

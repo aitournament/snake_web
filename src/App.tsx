@@ -44,51 +44,56 @@ function App() {
   ];
 
   return (
+    <>
+      <div className="App">
+        <ThemeProvider theme={theme}>
+          <AppBar position="static">
+            <Toolbar disableGutters>
+              <Typography
+                variant="h6"
+                noWrap
+                component="div"
+                sx={{ mr: 2, display: 'flex' }}
+              >
+                <Link to="/" style={{ textDecoration: 'none' }}>
+                  <svg width="250" height="30">
+                    <image href="img/aitournament_long_tea.svg" width="250" height="30" />
+                  </svg>
+                </Link>
+              </Typography>
 
-    <div className="App">
-      <ThemeProvider theme={theme}>
-        <AppBar position="static">
-          <Toolbar disableGutters>
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{ mr: 2, display: 'flex' }}
-            >
-              <Link to="/" style={{ textDecoration: 'none' }}>
-                <svg width="250" height="30">
-                  <image href="img/aitournament_long_tea.svg" width="250" height="30" />
-                </svg>
-              </Link>
-            </Typography>
+              {/* <Divider orientation="vertical" variant = "middle" flexItem sx={{ borderColor: 'grey.800' }} /> */}
+              {pages.map((page) => (
+                <Box sx={{
+                  display: 'flex',
+                  '& hr': {
+                    mx: 3,
+                  },
+                }}>
+                  <Divider orientation="vertical" variant="middle" flexItem sx={{ borderColor: 'grey.800' }} />
+                  <a href={page.link} style={{ textDecoration: 'none' }}>
+                    <Button
+                      sx={{ my: 2, color: "white", display: "block" }}
+                    >
+                      <Typography variant="h6">{page.name}</Typography>
+                    </Button>
+                  </a>
 
-            {/* <Divider orientation="vertical" variant = "middle" flexItem sx={{ borderColor: 'grey.800' }} /> */}
-            {pages.map((page) => (
-              <Box sx={{
-                display: 'flex',
-                '& hr': {
-                  mx: 3,
-                },
-              }}>
-                <Divider orientation="vertical" variant="middle" flexItem sx={{ borderColor: 'grey.800' }} />
-                <a href={page.link} style={{ textDecoration: 'none' }}>
-                  <Button
-                    sx={{ my: 2, color: "white", display: "block" }}
-                  >
-                    <Typography variant="h6">{page.name}</Typography>
-                  </Button>
-                </a>
+                </Box>
+              ))}
 
-              </Box>
-            ))}
-
-          </Toolbar>
-        </AppBar>
-        <Routes>
-          <Route path="/" element={<PlayPage/>} />
-        </Routes>        
-      </ThemeProvider>
-    </div>
+            </Toolbar>
+          </AppBar>
+          <Routes>
+            <Route path="/" element={<PlayPage/>} />
+          </Routes>        
+        </ThemeProvider>
+        
+      </div>
+      <footer style={{textAlign: "center"}}>
+        <p style={{color: "white"}}>&copy; {new Date().getFullYear()} Nathan Fox | AiTournament. All rights reserved.</p>
+      </footer>
+    </>
 
   );
 }
