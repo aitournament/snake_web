@@ -1,5 +1,5 @@
-import { Theme, Typography } from "@mui/material";
-import { Box, SxProps } from "@mui/system";
+import { Typography } from "@mui/material";
+import { Box } from "@mui/system";
 import { ReactNode, useState } from "react";
 import FileInput from "../../FileInput";
 import { SnakeVm } from "./Play";

@@ -1,25 +1,12 @@
-import { Box, ListItem, ListItemButton, ListItemText, Paper, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
-// import { List } from "react-virtualized";
-import List from "@mui/material/List";
+import { Box, ListItem, Paper, Typography } from "@mui/material";
 import { EventEnvelope, Event, Pos, SnakeDiedEvent } from "./event";
 import TimestampDisplay from "./Timestamp";
-// import { VirtualizedTable } from "./VirtualizedTable";
 import { FixedSizeList, ListChildComponentProps } from "react-window";
 
 
 export interface EventsDisplayProps {
     eventEnvelopes: EventEnvelope[]
 }
-
-interface RenderProps {
-    key: any,
-    index: any,
-    isScrolling: any,
-    isVisible: any,
-    style: any,
-}
-
 
 export default function EventsDisplay(props: EventsDisplayProps) {
     function renderRow(props: ListChildComponentProps) {
@@ -92,7 +79,7 @@ export function getSnakeDiedReason(event: SnakeDiedEvent): string {
             return "illegal move";
         }
         case "ZERO_HEALTH": {
-            return event.reason.data.type == "POISON" ? "zero health (poison)" : "zero health (hunger)";
+            return event.reason.data.type === "POISON" ? "zero health (poison)" : "zero health (hunger)";
         }
         case "EXECUTION_FAILURE": {
             switch (event.reason.data.type) {
@@ -175,11 +162,11 @@ function getEventMessage(event: Event): JSX.Element {
 }
 
 function teamColor(teamId: number): string {
-    return teamId == 0 ? "#ff8888": "#8888ff";
+    return teamId === 0 ? "#ff8888": "#8888ff";
 }
 
 function getColor(teamId: number): JSX.Element {
-    return teamId == 0 ? <span style={{color: '#ff8888'}}>Red</span> : <span style={{color: '#8888ff'}}>Blue</span>;
+    return teamId === 0 ? <span style={{color: '#ff8888'}}>Red</span> : <span style={{color: '#8888ff'}}>Blue</span>;
 }
 
 function snakeId(id: number): JSX.Element {

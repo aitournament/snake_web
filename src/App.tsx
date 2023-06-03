@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react';
 import './App.css';
-import FileInput from "./FileInput";
-import { alpha, AppBar, Box, Button, Container, createTheme, Divider, IconButton, Menu, MenuItem, rgbToHex, SvgIcon, Tab, Tabs, ThemeProvider, Toolbar, Typography } from '@mui/material';
+import { alpha, AppBar, Box, Button, createTheme, Divider, ThemeProvider, Toolbar, Typography } from '@mui/material';
 import { Link, Route, Routes } from 'react-router-dom';
 import PlayPage from './pages/play/Play';
 
@@ -64,7 +62,7 @@ function App() {
 
               {/* <Divider orientation="vertical" variant = "middle" flexItem sx={{ borderColor: 'grey.800' }} /> */}
               {pages.map((page) => (
-                <Box sx={{
+                <Box id={page.name} sx={{
                   display: 'flex',
                   '& hr': {
                     mx: 3,

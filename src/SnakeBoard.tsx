@@ -50,13 +50,11 @@ function bodyConnector(
   percent: number,
 ): JSX.Element {
   let min_x = Math.min(x1, x2);
-  let max_x = Math.max(x1, x2);
   let min_y = Math.min(y1, y2);
-  let max_y = Math.max(y1, y2);
 
   let thickness = TILE_SIZE * 0.5 * percent;
 
-  if (y1 == y2) {
+  if (y1 === y2) {
     // horizontal
     return <rect
       x={min_x * TILE_SIZE + TILE_SIZE * 0.5}
@@ -84,10 +82,10 @@ export default function SnakeBoard(props: SnakeBoardProps) {
   let elements = [];
   for(let snake_i = 0; snake_i < props.state.snakes.length; snake_i += 1) {
     let snake = props.state.snakes[snake_i];
-    let color = snake.team_id == 0 ? '#ff4242': '#4242ff';
+    let color = snake.team_id === 0 ? '#ff4242': '#4242ff';
 
     for(let body_i = 0; body_i < snake.body.length; body_i += 1) {
-      let size = body_i == 0? 0.7 : 0.5;
+      let size = body_i === 0? 0.7 : 0.5;
       let {x, y} = snake.body[body_i];
 
       elements.push(<circle

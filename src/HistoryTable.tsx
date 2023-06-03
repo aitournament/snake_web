@@ -1,7 +1,4 @@
-import { Box, Button, Link, ListItem, ListItemButton, ListItemText, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
-import List from "@mui/material/List";
-import { EventEnvelope, Event, Pos } from "./event";
-import TimestampDisplay from "./Timestamp";
+import { Box, Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
 
@@ -62,7 +59,7 @@ export default function HistoryTable(props: HistoryTableProps) {
             {props.items.map((row, i) => {
                 let winner;
 
-                if (row.winner == WinResult.Tie) {
+                if (row.winner === WinResult.Tie) {
                     winner = <p style={{color: "white"}}>TIE</p>
                 } else if (row.winner === WinResult.Blue) {
                     winner = <p style={{color: "#8888ff", margin: 0}}>BLUE</p>;

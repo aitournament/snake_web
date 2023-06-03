@@ -1,15 +1,13 @@
-import { Box, Button, Container, Paper, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
+import { Box, Button, Container, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import FileInput from "../../FileInput";
 import SnakeBoard, { BoardState } from "../../SnakeBoard";
 import WasmInput from "./WasmInput";
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 import ReplayIcon from '@mui/icons-material/Replay';
-// import ReactVirtualizedTable from "../../ReactVirutalizedTable";
 import Timestamp from "../../Timestamp";
-import { EventEnvelope, Event } from "../../event";
-import EventsDisplay, { getSnakeDiedReason } from "../../EventsDisplay";
+import { EventEnvelope } from "../../event";
+import EventsDisplay from "../../EventsDisplay";
 import HistoryTable, { HistoryItem, WinResult } from "../../HistoryTable";
 import { TextField } from "@mui/material";
 import CasinoIcon from '@mui/icons-material/Casino';
@@ -25,16 +23,6 @@ interface WasmFile {
 enum State {
   SelectWasm,
   Play,
-}
-
-function getWinReason(events: EventEnvelope[]): string {
-  for(let i = 0; i<events.length; i += 1) {
-    let event = events[i].event;
-    if (event.type == "SNAKE_DIED") {
-      return getSnakeDiedReason(event.data);
-    }
-  }
-  return "unknown";
 }
 
 export default function PlayPage() {

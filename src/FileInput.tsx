@@ -1,6 +1,6 @@
 
 import { Button, SxProps, Theme } from "@mui/material";
-import React, {ReactChild, ReactChildren, ReactNode} from "react";
+import {ReactNode} from "react";
 
 interface FileInputProps {
     children?: ReactNode,
