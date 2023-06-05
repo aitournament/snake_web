@@ -143,11 +143,6 @@ export function reset(seed) {
     wasm.reset(seed);
 }
 
-export function __wbindgen_string_new(arg0, arg1) {
-    const ret = getStringFromWasm0(arg0, arg1);
-    return addHeapObject(ret);
-};
-
 export function __wbindgen_json_parse(arg0, arg1) {
     const ret = JSON.parse(getStringFromWasm0(arg0, arg1));
     return addHeapObject(ret);
@@ -155,5 +150,10 @@ export function __wbindgen_json_parse(arg0, arg1) {
 
 export function __wbg_onEvent_8b6eed0298838427(arg0) {
     onEvent(takeObject(arg0));
+};
+
+export function __wbindgen_string_new(arg0, arg1) {
+    const ret = getStringFromWasm0(arg0, arg1);
+    return addHeapObject(ret);
 };
 
