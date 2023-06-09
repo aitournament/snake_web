@@ -39,7 +39,7 @@ Each snake starts with 100 health. One health is lost at the end of each tick. I
 
 Food has a health value, which is the amount that a snake's health with increase by consuming it. Snakes will also increase in length by one after consuming food (regardless of the health value).
 
-Freshly spanwed food will start with a health value of 1, and increases by 1 every tick up to a maximum of 50.
+Freshly spawned food will start with a health value of 1, and increases by 1 every tick up to a maximum of 50.
 
 New food will be spawned at the end of each tick to ensure there is always 5 food available (unless there is no more room in the arena).
 
