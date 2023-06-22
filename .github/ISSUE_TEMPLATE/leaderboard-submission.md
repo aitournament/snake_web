@@ -7,4 +7,4 @@ assignees: fuchsnj
 
 ---
 
-
+<!-- Upload your WASM file. It will be verified and added to the leaderboard. Please allow several days, as this is currently a manual process. -->
