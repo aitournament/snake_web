@@ -86,6 +86,9 @@ export default function LeaderboardPage() {
         </TableBody>
       </Table>
     </TableContainer>
+
+    <Typography sx={{margin: 3}}>Read about how to make it on the leaderboard <a href="/docs/leaderboard.html">here</a></Typography>
+
     </Box>
   </Box>
     
