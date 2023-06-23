@@ -2,6 +2,7 @@ import './App.css';
 import { alpha, AppBar, Box, Button, createTheme, Divider, ThemeProvider, Toolbar, Typography } from '@mui/material';
 import { Link, Route, Routes } from 'react-router-dom';
 import PlayPage from './pages/play/Play';
+import LeaderboardPage from './pages/Leaderboard';
 
 function App() {
   const theme = createTheme({
@@ -36,8 +37,19 @@ function App() {
   
   const pages = [
     {
+      link: "/play",
+      name: "Play",
+      external: false
+    },
+    {
+      link: "/leaderboard",
+      name: "Leaderboard",
+      external: false,
+    },
+    {
       link: "/docs",
-      name: "Docs"
+      name: "Docs",
+      external: true
     },
   ];
 
@@ -69,13 +81,20 @@ function App() {
                   },
                 }}>
                   <Divider orientation="vertical" variant="middle" flexItem sx={{ borderColor: 'grey.800' }} />
-                  <a href={page.link} style={{ textDecoration: 'none' }}>
+                  {page.external && <a href={page.link} style={{ textDecoration: 'none' }}>
                     <Button
                       sx={{ my: 2, color: "white", display: "block" }}
                     >
                       <Typography variant="h6">{page.name}</Typography>
                     </Button>
-                  </a>
+                  </a>}
+                  {!page.external && <Link to={page.link} style={{ textDecoration: 'none' }}>
+                    <Button
+                      sx={{ my: 2, color: "white", display: "block" }}
+                    >
+                      <Typography variant="h6">{page.name}</Typography>
+                    </Button>
+                  </Link>}
 
                 </Box>
               ))}
@@ -84,6 +103,8 @@ function App() {
           </AppBar>
           <Routes>
             <Route path="/" element={<PlayPage/>} />
+            <Route path="/play" element={<PlayPage/>} />
+            <Route path="/leaderboard" element={<LeaderboardPage/>} />
           </Routes>        
         </ThemeProvider>
         

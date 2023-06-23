@@ -59,6 +59,9 @@ footer {
 .MuiTable-root {
   background-color: #424242;
 }
+.MuiList-root {
+  background-color: #424242;
+}
 
 @keyframes App-logo-spin {
   from {
