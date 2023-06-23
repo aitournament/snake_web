@@ -51,6 +51,8 @@ jobs:
       - run: mkdir build/docs
       - name: Merge React and docs site
         run: cp -r book/book/* build/docs
+      - name: Generate 404 page
+        run: cp build/index.html build/404.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
